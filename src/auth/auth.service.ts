@@ -12,10 +12,12 @@ export class AutoService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn({ username, pass }): Promise<{ access_token: string }> {
+  async signIn( username: string,
+    pass: string,
+  ): Promise<{ access_token: string }> {
     const user = this.userService.getOne(username);
 
-    if (user?.password !== pass) {
+    if (user?.password!== pass) {
       throw new UnauthorizedException();
     }
     const payload = { sub: user.userId, username: user.username };
