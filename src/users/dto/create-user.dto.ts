@@ -2,14 +2,17 @@ import { IsString, IsInt, IsEnum, IsNotEmpty } from 'class-validator';
 export class CreateUserDto {
   @IsInt()
   @IsNotEmpty()
-  userId: number;
-
-  @IsString()
-  password: string;
+  id: number;
 
   @IsString()
   @IsNotEmpty()
   username: string;
+
+  @IsString()
+  email: string;
+
+  @IsString()
+  password: string;
 
   @IsEnum(['commander', 'solider'], { message: 'this role not valid' })
   @IsNotEmpty()
