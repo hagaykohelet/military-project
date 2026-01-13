@@ -8,18 +8,18 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/entities/user.entity';
 
 @Module({
-  imports: [UsersModule, AuthModule,SequelizeModule.forRootAsync({
-  useFactory: () => ({
-    dialect: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'root',
-    database: 'test',
-    models: [User],
-  }),
-}),
-UsersModule],
+  // imports: [UsersModule, AuthModule,SequelizeModule.forRootAsync({
+//   useFactory: () => ({
+//     dialect: 'mysql',
+//     host: 'localhost',
+//     port: 3306,
+//     username: 'root',
+//     password: 'root',
+//     database: 'test',
+//     models: [User],
+//   }),
+// }),
+// UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
