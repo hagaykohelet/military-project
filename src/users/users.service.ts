@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UsersService {
   private soliders: CreateUserDto[] = [];
 
-  addSolider(solider: CreateUserDto): string {
+  async addSolider(solider: CreateUserDto): Promise<string> {
+    const hash = await bcrypt.hash(solider.password, 10);
+    solider.password = hash;
     this.soliders.push(solider);
     return `solider added successfully`;
   }
@@ -13,24 +17,15 @@ export class UsersService {
     return [...this.soliders];
   }
 
-  getOne(username: string): CreateUserDto[] {
-    return this.soliders.filter((soli) => soli.username === username);
+  getOne(id: number) {
+    return this.soliders.find((soli) => soli.id === id);
   }
 
-  // put(id: number, solider: CreateUserDto): string {
-  //   this.soliders.forEach((soli) => {
-  //     if (soli.id === id) {
-  //       soli = solider;
-  //     }
-  //   });
-  //   return `${id} update`;
-  // }
-
-  delete(username: string): string {
+  delete(id: number): string {
     const index: number = this.soliders.findIndex(
-      (soliderId) => soliderId.username === username,
+      (soliderId) => soliderId.id === id,
     );
     this.soliders.splice(index, 1);
-    return `user ${username} deleted`;
+    return `user ${id} deleted`;
   }
 }
