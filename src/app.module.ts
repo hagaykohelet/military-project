@@ -8,6 +8,7 @@ import { User } from './users/entities/user.entity';
 import { ShiftModule } from './shift/shift.module';
 import { Shift } from './shift/entities/shift.entity';
 import { AssignmentModule } from './assignment/assignment.module';
+import { Assignment } from './assignment/entities/assignment.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { AssignmentModule } from './assignment/assignment.module';
       username: 'root',
       password: '',
       database: 'test',
-      models: [User, Shift],
+      models: [User, Shift, Assignment],
       autoLoadModels: true,
       synchronize: true,
     }),

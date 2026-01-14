@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   async getOne(username: string): Promise<User | null> {
-    return await this.userModel.findOne<User>({
+    return await this.userModel.findOne({
       where: {
         username: username,
       },
