@@ -9,8 +9,11 @@ export class AuthService {
     private twtService: JwtService,
   ) {}
 
-  async signIn(id: number, pass: string): Promise<{ access_token: string }> {
-    const user = this.usersService.getOne(id);
+  async signIn(
+    username: string,
+    pass: string,
+  ): Promise<{ access_token: string }> {
+    const user = await this.usersService.getOne(username);
     if (!user?.password) {
       throw new UnauthorizedException();
     }
